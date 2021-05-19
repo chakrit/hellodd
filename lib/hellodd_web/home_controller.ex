@@ -12,7 +12,15 @@ defmodule HelloddWeb.HomeController do
   end
 
   def update(conn, %{"id" => id}) do
-    tweets = Hellodd.Tweet.update(id)
-    conn |> json(tweets)
+    result =
+      case Hellodd.Tweet.update(id) do
+        {:ok, tweet} ->
+          tweet
+
+        {:error, :not_found} ->
+          %{error: "tweet not found"}
+      end
+
+    conn |> json(result)
   end
 end

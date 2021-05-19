@@ -3,7 +3,7 @@ defmodule Hellodd.Tweet do
 
   @derive {Jason.Encoder, only: [:id, :text]}
   schema "tweets" do
-    field :text, :string
+    field(:text, :string)
   end
 
   def get_all() do
@@ -15,12 +15,13 @@ defmodule Hellodd.Tweet do
   end
 
   def update(id) do
-    post = Hellodd.Repo.get!(Heloodd.Tweet, id)
-    post = Ecto.Changeset.change post, text: "New text"
-    # Hellodd.Repo.update(post)
-    case Hellodd.Repo.update post do
-      {:ok, struct}       -> :ok # Updated with success
-      {:error, changeset} -> changeset # Something went wrong
+    case Hellodd.Repo.get(Hellodd.Tweet, id) do
+      nil ->
+        {:error, :not_found}
+
+      tweet ->
+        Ecto.Changeset.change(tweet, text: "New text")
+        |> Hellodd.Repo.update()
     end
   end
 end
