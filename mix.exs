@@ -22,7 +22,11 @@ defmodule Hellodd.MixProject do
     [
       {:jason, "~> 1.2.2"},
       {:phoenix, "~> 1.5.9"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:ecto, "~> 3.6.1"},
+      {:phoenix_ecto, "~> 4.1"},
+      {:ecto_sql, "~> 3.4"},
+      {:postgrex, ">= 0.0.0"},
     ]
   end
 end

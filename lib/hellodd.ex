@@ -6,7 +6,8 @@ defmodule Hellodd do
     IO.puts("hello , world")
 
     children = [
-      Hellodd.Endpoint
+      Hellodd.Endpoint,
+      Hellodd.Repo
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)
